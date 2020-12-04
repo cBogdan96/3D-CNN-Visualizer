@@ -7884,8 +7884,6 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: DenseNet201
       m_Image: {fileID: 0}
-    - m_Text: MobileNet
-      m_Image: {fileID: 0}
     - m_Text: MobileNetV2
       m_Image: {fileID: 0}
     - m_Text: InceptionV3

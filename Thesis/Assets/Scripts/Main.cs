@@ -58,7 +58,7 @@ public class Main : MonoBehaviour
         visualisationMode = sceneLoader.mode;
         inputImageSizeValue = sceneLoader.inputImageSizeValue;
         
-        if (model.Equals("18"))
+        if (model.Equals("17"))
         {
             modelPath = sceneLoader.pathModel;
         }
@@ -89,7 +89,7 @@ public class Main : MonoBehaviour
         {
             layersToSee = layersToSee + " " + layers.Current;
         }
-        byte[] start_server = Encoding.ASCII.GetBytes("start " + numThreads + " "+ model + " "+ modelPath +" " + visualisationMode + " " + videoPath + " " + sceneLoader.framesPerSecond + " "+ layersToSee + "\n"); /// start server layersToSee
+        byte[] start_server = Encoding.ASCII.GetBytes("start " + numThreads + " "+ model + " "+ modelPath +" " + visualisationMode + " " + videoPath + " " + sceneLoader.framesPerSecond + " "+ layersToSee + "\n"); 
 
         var z = socketConnector.SendAndReceive(start_server);
         Debug.Log("I started deserialization");
@@ -104,8 +104,6 @@ public class Main : MonoBehaviour
         }
 
     }
-
-
 
     void Update()
     {
@@ -241,32 +239,30 @@ public class Main : MonoBehaviour
                 return "4 224";
             case ("DenseNet201"):
                 return "5 224";
-            case ("MobileNet"):
-                return "6 224";
             case ("MobileNetV2"):
-                return "7 224";
+                return "6 224";
             case ("InceptionV3"):
-                return "8 299";
+                return "7 299";
             case ("InceptionResNetV2"):
-                return "9 299";
+                return "8 299";
             case ("ResNet50"):
-                return "10 224";
+                return "9 224";
             case ("ResNet50V2"):
-                return "11 224";
+                return "10 224";
             case ("ResNet101"):
-                return "12 224";
+                return "11 224";
             case ("ResNet101V2"):
-                return "13 224";
+                return "12 224";
             case ("ResNet152"):
-                return "14 224";
+                return "13 224";
             case ("ResNet152V2"):
-                return "15 224";
+                return "14 224";
             case ("NASNetLarge"):
-                return "16 331";
+                return "15 331";
             case ("NASNetMobile"):
-                return "17 224";
-            case ("18"):
-                return "18";
+                return "16 224";
+            case ("17"):
+                return "17";
             default: return "0 224";
         }
     }

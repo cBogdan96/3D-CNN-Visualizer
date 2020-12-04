@@ -40,7 +40,6 @@ public class SceneLoader : MonoBehaviour
         DenseNet121,
         DenseNet169,
         DenseNet201,
-        MobileNet,
         MobileNetV2, 
         InceptionV3,
         InceptionResNetV2,
@@ -129,10 +128,6 @@ public class SceneLoader : MonoBehaviour
                 PopulateDropdown(theadsSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
                 PopulateDropdown(frameSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
                 break;
-            case ("MobileNet"):
-                PopulateDropdown(theadsSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
-                PopulateDropdown(frameSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6","9","15","20" });
-                break;
             case ("MobileNetV2"):
                 PopulateDropdown(theadsSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
                 PopulateDropdown(frameSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6", "9", "15", "20" });
@@ -191,13 +186,11 @@ public class SceneLoader : MonoBehaviour
 
     public void setFps(int value)
     {
-        //Debug.Log(int.Parse(frameSelector.GetComponent<Dropdown>().options[value].text));
         framesPerSecond = int.Parse(frameSelector.GetComponent<Dropdown>().options[value].text);
     }
 
     public void setThreads(int value)
     {
-        //Debug.Log(int.Parse(theadsSelector.GetComponent<Dropdown>().options[value].text));
         threads = int.Parse(theadsSelector.GetComponent<Dropdown>().options[value].text);
     }
 
@@ -223,9 +216,7 @@ public class SceneLoader : MonoBehaviour
             else 
             {
                 layersToGet.Remove(value);    
-            }
-        //Debug.Log(layersToGet.Count);
-    
+            }    
     }
 
     void PopulateDropdown(Dropdown list, List<String> elementsList)
