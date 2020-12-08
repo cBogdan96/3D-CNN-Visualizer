@@ -63,7 +63,7 @@ public class SceneLoader : MonoBehaviour
 
         pathModel = pathToModel.GetComponent<InputField>().text;
         pathVideo = pathToVideo.GetComponent<InputField>().text;
-        if ((int)modelPicker == 18)
+        if ((int)modelPicker == 17)
         {
             inputImageSizeValue = int.Parse(inputImageSize.GetComponent<InputField>().text.ToString());
         }
@@ -85,7 +85,7 @@ public class SceneLoader : MonoBehaviour
     public void setModel(int model) {
         modelPicker = (Models) model;
         //Debug.Log(modelPicker);
-        if ((int)modelPicker == 18)
+        if ((int)modelPicker == 17)
         {
             pathToModel.SetActive(true);
             inputImageSize.SetActive(true);
@@ -172,7 +172,7 @@ public class SceneLoader : MonoBehaviour
                 PopulateDropdown(theadsSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
                 PopulateDropdown(frameSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
                 break;
-            case ("18"):
+            case ("17"):
                 PopulateDropdown(theadsSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
                 PopulateDropdown(frameSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
                 break;
