@@ -130,7 +130,7 @@ public class SceneLoader : MonoBehaviour
                 break;
             case ("MobileNetV2"):
                 PopulateDropdown(theadsSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
-                PopulateDropdown(frameSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6", "9", "15", "20" });
+                PopulateDropdown(frameSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6", "9", "15", "20", "30" });
                 break;
             case ("InceptionV3"):
                 PopulateDropdown(theadsSelector.GetComponent<Dropdown>(), new List<string> { "1", "2", "3", "4", "5", "6" });
