@@ -7,10 +7,6 @@ using UnityEngine.UI;
 public class FeatureMapCreator
 {
     public StructHelper structHelper = new StructHelper();
-
-
-    //public static List<string> predictions_labels  = new List<string>();
-
     public FeatureMapCreator()
     {
     }

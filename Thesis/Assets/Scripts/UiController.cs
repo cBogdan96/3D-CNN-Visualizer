@@ -38,7 +38,6 @@ public class UiController : MonoBehaviour
     void Update()
     {
 
-        //text.transform.position = cam1.transform.position + cam1.transform.forward * 3;
         switchCamera();
         Movement();
         Zoom();
@@ -152,8 +151,6 @@ public class UiController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            //GameObject.Find("BackCamera").GetComponent<Camera>().enabled = true;
-            //GameObject.Find("MainCamera").GetComponent<Camera>().enabled = false;
             cam1.tag = "Untagged";
             cam2.tag = "Untagged";
             cam3.tag = "Untagged";

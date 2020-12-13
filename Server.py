@@ -128,7 +128,6 @@ def model_NASNetMobile():
     return image_model
 
 def model_H5_model(model_path):
-    # image_model = tf.keras.models.load_model('C:/Users/bcovrig/Desktop/PrivateStuff/thesis/saved_model/my_model')
     image_model = tf.keras.models.load_model(model_path)
     image_model.summary()
     return image_model
@@ -176,7 +175,6 @@ def predict(index, img_bytes, image_model, layers_indices):
     data = {}
     if True:
         img = expand_dims(img_bytes, axis=0)
-        ## poate ma mai uit sa  pun pe GPU (CUDA) ex pythorch image_model.cuda
         feature_maps = image_model.predict(img)
 
         # When running for the first time, send also the labels in the order of the model (not sorted by probabilites).
@@ -202,7 +200,6 @@ def predict(index, img_bytes, image_model, layers_indices):
             layer_counter = layer_counter + 1
             ix = 1
             layer_name = image_model.layers[layers_indices[layer_counter]].name
-            # print(image_model.layers[layers_indices[layer_counter]].name)
             if 'fc' in layer_name:
                 fmap = fmap - fmap.min()
                 if fmap.max() != 0:
@@ -234,14 +231,11 @@ def predict(index, img_bytes, image_model, layers_indices):
         endExtraction = time.time()
         print(f"Extracting features time for thread {index} - {endExtraction-startExtraction} - {datetime.datetime.now().strftime('%H:%M:%S')}")    
         start = time.time()
-        elem = msgpack.packb(data) # , use_bin_type=True
+        elem = msgpack.packb(data) 
         # print(len(elem))
         end = time.time()
         print(f"Compresion time for thread {index} -  {end-start} - {datetime.datetime.now().strftime('%H:%M:%S')}")
         return elem
-    # except Exception as e:
-    #     print(f"Exception: {e}")
-    #     traceback.print_stack()
 
 
 async def predict_and_write(index, image, image_model, layers_indices, writer):
@@ -252,9 +246,6 @@ async def predict_and_write(index, image, image_model, layers_indices, writer):
         writer.write(nn_output)
         await writer.drain()
         print(f"Job sent sucessfully {index} - {datetime.datetime.now().strftime('%H:%M:%S')}")
-    # except Exception as e:
-    #     print(f"Exception: {e}")
-    #     traceback.print_stack()
 
 
 
@@ -263,15 +254,11 @@ async def worker_task(index, image_queue, semaphore, image_model, layers_indices
 
     async def work_thread(reader, writer): 
         while True:
-            # print(f"thread primesc munca {index} - {datetime.datetime.now().strftime('%H:%M:%S')}")
             await reader.readline()
-            print(f"thread read from  reader {index} - {datetime.datetime.now().strftime('%H:%M:%S')}")
             semaphore.release()
             image = image_queue.get()
-            # print(f"thread am luat imaginea si poate fii prezisa {index} - {datetime.datetime.now().strftime('%H:%M:%S')}")
             await predict_and_write(index, image, image_model, layers_indices, writer)
 
-    print(f"port started is {PORT+ index}")
     work = await asyncio.start_server(work_thread, HOST, PORT + index)
     await work.serve_forever()
 
@@ -326,9 +313,6 @@ async def server_task():
                     Process(target=worker_thread, args=(index + 1, image_queue, semaphore,model_choice, layers_to_see, model_path)).start()
 
                 await predict_and_write(0, image, image_model, layers_indices, writer)
-            # if data[0] == "stop":
-            #     num_threads = int(data[1])
-
 
     
     server = await asyncio.start_server(server_work, HOST, PORT)
@@ -342,8 +326,8 @@ def camera_worker(image_queue, semaphore, IMAGE_SIZE, visualization_type, video_
     print("start capturing ")
 
     if(visualization_type == 1):
-        video_source = cv2.VideoCapture(video_path)      # 'C:/Users/bcovrig/Desktop/PrivateStuff/thesis/LeidenUniversity-MasterThesis/test2.mp4'
-        video_source.set(cv2.CAP_PROP_FPS, frame_rate)     #frame_rate frame_rate
+        video_source = cv2.VideoCapture(video_path)      
+        video_source.set(cv2.CAP_PROP_FPS, frame_rate)   
     else:
         video_source = cv2.VideoCapture(0)
     while True:

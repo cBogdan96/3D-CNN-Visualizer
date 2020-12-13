@@ -45,10 +45,6 @@ public class Main : MonoBehaviour
 
     void Start()
     {
-
-        //TODO: check camera to change on button click
-        //TODO: add loading screen
-        //FeatureMapCreator.predictions_labels = loadLabelsImageNet();
         featureMapCreator = new FeatureMapCreator();
         sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
         socketConnector = new Connector();
@@ -128,10 +124,7 @@ public class Main : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //byte[] stop_server = Encoding.ASCII.GetBytes("stop " + numThreads + "\n"); /// start server 
-            //var z = socketConnector.SendAndReceive(stop_server);
             Application.Quit();
-            //Debug.Log("Am iesit");
         }
         recordTimer += Time.deltaTime;
 
@@ -163,7 +156,6 @@ public class Main : MonoBehaviour
         framesTimer = 0f;
 
         bool featureExists  = this.queue.TryTake( out this.featureMap);
-        //Debug.Log("iau element iar lungimea ramasa este" + this.featureMap);
         if (!featureExists) {
             return;
         }

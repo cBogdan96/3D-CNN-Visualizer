@@ -1,0 +1,23 @@
+System requirements tested:
+Windows 10 Pro
+Processor Intel Core i7-9750H CPU 2.6 Ghz 2.59Ghz  
+Memory 32 GB RAM
+System type 64 bit
+
+Install python 3.8.6 64 bit  https://www.python.org/downloads/release/python-380/
+project dependencies
+numpy==1.18.5
+pycallgraph==1.0.1
+tensorflow_gpu==2.3.0
+opencv_python_headless==4.4.0.42
+msgpack_python==0.5.6
+Pillow==8.0.1
+tensorflow==2.3.1
+
+Install Unity HUB  https://unity3d.com/get-unity/download
+use Unity version 2019.3.13f1 when  you open the project
+In Unity HUB there is ADD buton. After you press  it search for folder project Thesis and open it. The project appear in the list in UnityHUB and just by clicking on it it should open in unity 
+For running only the program  
+Run Thesis.exe for starting the client
+
+Order Run Server.py -> run Thesis.exe / build project from Unity

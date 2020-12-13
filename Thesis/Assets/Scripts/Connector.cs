@@ -35,7 +35,6 @@ public class Connector
             catch (SocketException retryConnectException)
             {
                 System.Threading.Thread.Sleep(5000);
-                //client.Connect(ip, port);
                 Debug.Log(numberOfTimes);
                 if (numberOfTimes == 5)
                 {
@@ -48,9 +47,8 @@ public class Connector
                 }
             }
         }
-        //client.Connect(ip, port);
     }
-    ~Connector()       /// se apeleaza automat cand se distruge obiectul se apeleaza la gc
+    ~Connector()      
     {
         Debug.Log("am inchis portul" + port);
         client.GetStream().Close();

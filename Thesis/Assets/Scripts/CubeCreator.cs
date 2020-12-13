@@ -24,8 +24,7 @@ public class CubeCreator : MonoBehaviour
         textureFeature.SetPixels(pixels);
         textureFeature.Apply();
 
-        gameObject.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", textureFeature); /// you will not need this in update 
-        //Debug.Log(" coords are" + featureMapData.getCoordX() + " " +  featureMapData.getCoordY() + " " + featureMapData.getCoordZ());
+        gameObject.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", textureFeature);
         gameObject.transform.position = new Vector3(featureMapData.getCoordX(), featureMapData.getCoordY(), featureMapData.getCoordZ());
         gameObject.transform.Rotate(0, 0, 0, Space.Self);
         gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f) * 30;

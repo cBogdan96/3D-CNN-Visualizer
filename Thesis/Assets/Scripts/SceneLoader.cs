@@ -74,7 +74,6 @@ public class SceneLoader : MonoBehaviour
 
     public void QuitApplication() {
         Application.Quit();
-        //Debug.Log("Am iesit");
     }
     public void setLoadingTime(float time) 
     {
@@ -84,7 +83,6 @@ public class SceneLoader : MonoBehaviour
 
     public void setModel(int model) {
         modelPicker = (Models) model;
-        //Debug.Log(modelPicker);
         if ((int)modelPicker == 17)
         {
             pathToModel.SetActive(true);

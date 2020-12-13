@@ -48,15 +48,6 @@ public class PlaneCreator : MonoBehaviour
         gameObject.transform.position = new Vector3(featureMapData.getCoordX(), featureMapData.getCoordY(), featureMapData.getCoordZ());
         gameObject.transform.Rotate(-90, 180, 0, Space.Self);
         gameObject.transform.localScale = new Vector3(width / 10f , 1.0f, height / 10f );
-            
-        //    *scale;
-
-        //var rectTransform = gameObject.GetComponent<RectTransform>();
-        //if (rectTransform != null)
-        //{
-        //    rectTransform.sizeDelta = new Vector2(width, height);
-        //}
-        /// play with localScale 
     }
 
     private void updatePlaneObject(Color[] pixels)
