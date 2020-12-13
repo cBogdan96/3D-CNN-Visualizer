@@ -29,7 +29,7 @@ HOST = '127.0.0.1'
 # Base port for communication.
 PORT = 60000
 # Number of predictions to make.
-PREDICTIONS_COUNT = 5
+PREDICTIONS_COUNT = 1000
 
 # PREDICTION_LAYER = True
 # model_choice = 0
@@ -179,18 +179,22 @@ def predict(index, img_bytes, image_model, layers_indices):
         ## poate ma mai uit sa  pun pe GPU (CUDA) ex pythorch image_model.cuda
         feature_maps = image_model.predict(img)
 
-        
-        feature_maps = image_model.predict(img)
-        # Ordered of probability
-        # preds_top = tf.keras.applications.imagenet_utils.decode_predictions(feature_maps[- 1], top=5)
+        # When running for the first time, send also the labels in the order of the model (not sorted by probabilites).
+        if index == 0:
+            try:
+                # Ordered of probability
+                preds_top = tf.keras.applications.imagenet_utils.decode_predictions(feature_maps[-1], top=PREDICTIONS_COUNT)
 
-        # for i in range(PREDICTIONS_COUNT):
-        #     data[f"text{i}"] = {
-        #         str(preds_top[0][i][1]):
-        #         np.array([[(preds_top[0][i][2] * 100).astype(np.uint8)]]).tolist()    
-        #     }
+                # feature_maps[-1] has the same values as preds_top[0]
+                # Form the labels array with the order from feature_maps
+                labels = [''] * len(preds_top)
+                for (_, class_name, value) in preds_top[0]:
+                    labels[np.where(feature_maps[-1][0] == value)[0][0]] = class_name
+                data['labels'] = {f"{i}_{label}": [[42]] for (i, label) in enumerate(labels)}
+            except Exception as e:
+                print("WARN: Cannot extract labels for model")
+                data['labels'] = {f"{i}": [[42]] for i in range(len(feature_maps[-1]))}
         
-        # print(data)
         startExtraction = time.time()
         layer_counter = -1
         for fmap in feature_maps:  # of each layer
@@ -209,7 +213,7 @@ def predict(index, img_bytes, image_model, layers_indices):
                 if fmap.max() != 0:
                     fmap = fmap/fmap.max() * 255.0
                 fmap = fmap.astype(np.uint8)
-                name_pred = 'fmap_{}'.format(layer_name)
+                name_pred = 'fmap_{}'.format(layer_name)   
                 feature_map[name_pred] = fmap.astype(np.uint8).tolist()
             elif 'conv' in layer_name:
                 if isinstance(image_model.layers[layers_indices[layer_counter]].output_shape[0], Iterable):

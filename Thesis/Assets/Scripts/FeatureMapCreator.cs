@@ -39,6 +39,7 @@ public class FeatureMapCreator
         featureMapData.setCoordZ(0);
         int counterLayers = 0;
         int scalingFactor = 40;
+        var labels = new List<string>(feature["labels"].Keys);
 
         foreach (KeyValuePair<string, Dictionary<string, ushort[][]>> layer in feature)
         {
@@ -78,7 +79,7 @@ public class FeatureMapCreator
                             featureMapData.setCoordY(featureMapData.getCoordY() + 60);
 
                             if(featureMapData.getName().Contains("pred")){
-                                cube.createCube(featureMapData,name + "_" + index.ToString(), featureMaps[index]); 
+                                cube.createCube(featureMapData, name + "_" + labels[index], featureMaps[index]); 
                                 structHelper.LastLayersPredictions.Add(name + "_" + index.ToString(), cube);
                             }else{
                                 cube.createCube(featureMapData, name + "_" + index.ToString(), featureMaps[index]); 
